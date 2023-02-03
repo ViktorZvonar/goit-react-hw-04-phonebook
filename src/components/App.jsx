@@ -1,6 +1,6 @@
 // import { Component } from 'react';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { nanoid } from 'nanoid';
 
@@ -16,8 +16,17 @@ const items = [
 ];
 
 const App = () => {
-  const [contacts, setContacts] = useState([...items]);
+  // const [contacts, setContacts] = useState([...items]);
+  const [contacts, setContacts] = useState(() => {
+    const parsedContacts = JSON.parse(localStorage.getItem('my-contacts'));
+    localStorage.clear();
+    return parsedContacts ? contacts : [...items];
+  });
   const [filter, setFilter] = useState('');
+
+  useEffect(() => {
+    localStorage.setItem('my-contacts', JSON.stringify(contacts));
+  }, [contacts]);
 
   const formSubmitHandler = ({ name, number }) => {
     const normalizedFind = name.toLowerCase();
