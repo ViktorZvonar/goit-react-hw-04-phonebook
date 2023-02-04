@@ -6,12 +6,12 @@ import PropTypes from 'prop-types';
 import css from './Form.module.css';
 
 const Form = ({ onSubmit }) => {
-  const inititalState = {
+  const initialState = {
     name: '',
     number: '',
   };
 
-  const [state, setState] = useState({ ...inititalState });
+  const [state, setState] = useState({ ...initialState });
 
   const nameInputId = nanoid();
   const phoneInputId = nanoid();
@@ -26,7 +26,7 @@ const Form = ({ onSubmit }) => {
   const handleSubmit = e => {
     e.preventDefault();
     onSubmit(state);
-    setState({ ...inititalState });
+    setState({ ...initialState });
   };
 
   return (
